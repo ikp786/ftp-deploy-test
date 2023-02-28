@@ -1,5 +1,6 @@
 on:
   push:
+    branches: master
     paths:
       - 'badmin/testgit/*'
 name: FTP Deploy
