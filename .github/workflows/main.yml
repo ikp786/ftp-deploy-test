@@ -12,8 +12,8 @@ jobs:
       - name: Deploy file
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-         username: 'new@nandiyouthfoundation.com'
-         server: 'ftp.premad.in'
+         username: 'issyway@issyway.com'
+         server: 'issyway.com'
          port: '21'
-         server-dir: '/ibrahim/'
-         password: 'New@2417'
+         server-dir: '/badmin/testgit/'
+         password: 'Ishanji007@@'
