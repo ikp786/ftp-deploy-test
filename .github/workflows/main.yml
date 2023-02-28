@@ -15,5 +15,5 @@ jobs:
          username: 'new@nandiyouthfoundation.com'
          server: 'ftp.premad.in'
          port: '21'
-         server-dir: '//nandiyouthfoundation.com/haniti/'
-         password: '/ibrahim/'
+         server-dir: '/ibrahim/'
+         password: 'New@2417'
