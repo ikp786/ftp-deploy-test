@@ -15,5 +15,5 @@ jobs:
          username: 'newftp@molniwasi.org'
          server: 'ftp.premad.in'
          port: '21'
-         server-dir: '/badmin/'
+         server-dir: '/public_html/www.premad.in/badmin/'
          password: 'newftp_250'
