@@ -1,21 +1,19 @@
 on:
   push:
-    branches: master
-    paths:
-      - 'badmin/testgit/*'
-name: FTP Deploy
+    branches: main
 jobs:
-  FTP-Deploy-Action:
-    name: FTP-Deploy-Action
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2.1.0
-      with:
-        fetch-depth: 2
-    - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@master
-      with:
-        ftp-server: 'ftp://issyway.com'
-        ftp-username: 'issyway@issyway.com'
-        ftp-password: 'Ishanji007@@'
-        local-dir: badmin/testgit/
+    deploy_job:
+     runs-on: ubuntu-latest
+     name: deploy
+     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Deploy file
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        with:
+         username: 'new@nandiyouthfoundation.com'
+         server: 'ftp.premad.in'
+         port: '21'
+         server-dir: '//nandiyouthfoundation.com/haniti/'
+         password: '/ibrahim/'
