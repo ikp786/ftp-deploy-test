@@ -16,4 +16,4 @@ jobs:
          ftp-server: 'ftp://issyway.com'
          ftp-username: 'issyway@issyway.com'         
          server-dir: '/badmin/'
-         ftp-username: 'Ishanji007@@'
+         ftp-password: 'Ishanji007@@'
