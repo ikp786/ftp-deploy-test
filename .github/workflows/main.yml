@@ -16,5 +16,5 @@ jobs:
          username: 'issyway@issyway.com'
          server: 'ftp://issyway.com'
          
-         server-dir: '//nandiyouthfoundation.com/haniti/'
+         server-dir: '/badmin/'
          password: 'Ishanji007@@'
