@@ -2,11 +2,10 @@ on: push
 name: Publish Website
 jobs:
     FTP-Deploy-Action:
-    name: FTP-Deploy-Action
-    runs-on: ubuntu-latest     
-    steps:
+      name: FTP-Deploy-Action
+      runs-on: ubuntu-latest     
+      steps:
 
-    
       - uses: actions/checkout@v2
         with:
           fetch-depth: 2
