@@ -1,41 +1,53 @@
+name: Deploy
+
 on:
   push:
-    branches: master
+    branches:
+      - master
+
 jobs:
   deploy_job:
     runs-on: ubuntu-latest
-    name: deploy
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      
-      - name: Copy files via SCP
-        uses: appleboy/scp-action@v0.1.3
-        with:
-          host: '13.234.18.200'
-          username: 'ubuntu'
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          source: './*'  # Path relative to the repository root
-          target: '/var/www/html/'
-          timeout: 30s
-          command_timeout: 10m
-          use_insecure_cipher: false
-          rm: false
-          debug: true
-          strip_components: 0
-          overwrite: false
-          proxy_port: 22
-          proxy_timeout: 30s
-          proxy_use_insecure_cipher: false
-      
-      - name: Execute remote commands via SSH
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: '13.234.18.200'
-          username: 'ubuntu'
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            cd /var/www/html/
-            # Add your deployment commands here
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Copy files via SCP
+      uses: appleboy/scp-action@v0.1.3
+      with:
+        host: '13.234.18.200'
+        username: 'ubuntu'
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        source: './*'
+        target: '/var/www/html/'
+        timeout: 30s
+        command_timeout: 10m
+        use_insecure_cipher: false
+        rm: false
+        debug: true
+        strip_components: 0
+        overwrite: false
+
+    - name: Execute remote commands via SSH
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        host: '13.234.18.200'
+        username: 'ubuntu'
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /var/www/html/
+          # Add your deployment commands here
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        sync: false
+        use_insecure_cipher: false
+        timeout: 30s
+        command_timeout: 10m
+        proxy_port: 22
+        proxy_timeout: 30s
+        proxy_use_insecure_cipher: false
+        script_stop: false
+        debug: false
