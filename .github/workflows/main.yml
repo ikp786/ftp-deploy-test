@@ -16,14 +16,24 @@ jobs:
           username: 'ubuntu'
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          source: '/var/www/html/*'
+          source: './*'  # Path relative to the repository root
           target: '/var/www/html/'
+          timeout: 30s
+          command_timeout: 10m
+          use_insecure_cipher: false
+          rm: false
+          debug: true
+          strip_components: 0
+          overwrite: false
+          proxy_port: 22
+          proxy_timeout: 30s
+          proxy_use_insecure_cipher: false
       
       - name: Execute remote commands via SSH
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: '13.234.18.200'
-          username: 'YOUR_SSH_USERNAME'
+          username: 'ubuntu'
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
