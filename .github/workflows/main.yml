@@ -1,53 +1,30 @@
-name: Deploy
+name: Deploy PHP Application
 
 on:
   push:
     branches:
-      - master
+      - master  # Adjust branch name as per your setup
+  pull_request:
+    branches:
+      - master  # Adjust branch name as per your setup
 
 jobs:
-  deploy_job:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest  # You can choose another OS if needed
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Copy files via SCP
-      uses: appleboy/scp-action@v0.1.3
-      with:
-        host: '13.234.18.200'
-        username: 'ubuntu'
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
-        source: './*'
-        target: '/var/www/html/'
-        timeout: 30s
-        command_timeout: 10m
-        use_insecure_cipher: false
-        rm: false
-        debug: true
-        strip_components: 0
-        overwrite: false
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+      - name: Deploy to server via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          local-dir: '/var/www/html/'
 
-    - name: Execute remote commands via SSH
-      uses: appleboy/ssh-action@v0.1.4
-      with:
-        host: '13.234.18.200'
-        username: 'ubuntu'
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
-        script: |
-          cd /var/www/html/
-          # Add your deployment commands here
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        sync: false
-        use_insecure_cipher: false
-        timeout: 30s
-        command_timeout: 10m
-        proxy_port: 22
-        proxy_timeout: 30s
-        proxy_use_insecure_cipher: false
-        script_stop: false
-        debug: false
